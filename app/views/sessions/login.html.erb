@@ -1,0 +1,36 @@
+<link href='https://fonts.googleapis.com/css?family=Work+Sans:400,300,700' rel='stylesheet' type='text/css'>
+<%= content_tag :div, class: "container" do -%>
+  <%= content_tag :div, class: "profile" do -%>
+    <button class="profile__avatar" id="infoLogo">
+      <img src="/assets/logo.png" alt="Logo" />
+    </button>
+    <%= content_tag :div, class: "profile__form" do -%>
+      <%= form_tag(:action => 'login_attempt') do %>
+        <%= content_tag :div, class: "profile__fields" do -%>
+          <%= content_tag :div, class: "field" do -%>
+            <input type="text" id="_email" class="input" required pattern=.*\S.* />
+            <label for="fieldUser" class="label">Username</label>
+          <% end %>
+          <%= content_tag :div, class: "field" do -%>
+            <input type="password" id="_password" class="input" required pattern=.*\S.* />
+            <label for="fieldPassword" class="label">Password</label>
+          <% end %>
+          <%= button_tag(type: 'submit', class: 'profile__footer') do %>
+            <%= content_tag :div, class: "button raised blue" do -%>
+              <div class="center" fit>LOGIN</div>
+              <paper-ripple fit></paper-ripple>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<script type="application/javascript">
+  document.getElementById('infoLogo').addEventListener('click', function () {
+    [].map.call(document.querySelectorAll('.profile'), function(el) {
+      el.classList.toggle('profile--open');
+    });
+  });
+</script>
