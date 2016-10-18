@@ -1,2 +1,157 @@
-<h1>Sessions#home</h1>
-<p>Find me in app/views/sessions/home.html.erb</p>
+<script>
+  $(function(){
+    var hash = window.location.hash;
+    hash && $('ul.nav a[href="' + hash + '"]').tab('show');
+  });
+</script>
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <img class="navbar-nav" style="margin: 5px 15px 0px 0px;" src="/assets/logo.png" height="40px;">
+      <a class="navbar-brand" href="home">InfoShare Admin Panel</a>
+    </div>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="navbar-brand"><%=@current_user.email%></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="">Profile</a></li>
+            <li><a href="">Settings</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="logout">Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="main-content">
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#users" aria-controls="users" role="tab" data-toggle="tab">Users</a></li>
+    <li role="presentation"><a href="#categories" aria-controls="categories" role="tab" data-toggle="tab">Categories</a></li>
+    <li role="presentation"><a href="#requests" aria-controls="requests" role="tab" data-toggle="tab">Requests</a></li>
+    <li role="presentation"><a href="#information" aria-controls="information" role="tab" data-toggle="tab">Informations</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="users">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Email</th>
+            <th>Password hash</th>
+            <th>Registration date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @users.each do |user| %>
+            <tr>
+              <th scope="row"><%= user.id %></th>
+              <td><%= user.email %></td>
+              <td><%= user.password %></td>
+              <td><%= user.registrationDate %></td>
+              <td>
+                <%= if(user.confirmed)
+                      button_to "Block", { action:"blockUser", controller:"sessions", _userId:user.id}, { class:"btn btn-warning"}
+                  else
+                      button_to "Activate", { action:"activateUser", controller:"sessions", _userId:user.id}, { class:"btn btn-success"}
+                  end
+                    button_to "Delete", { action:"deleteUser", controller:"sessions", _userId:user.id}, { class:"btn btn-danger"}
+                %>
+              </td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="categories">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>User Id</th>
+            <th>Creation date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @categories.each do |category| %>
+            <tr>
+              <th scope="row"><%= category.id %></th>
+              <td><%= category.name %></td>
+              <td><%= category.userId %></td>
+              <td><%= category.creationDate %></td>
+              <td><%= button_to "Delete", { action: "deleteCategory", controller:"sessions", _categoryId:category.id}, { class:"btn btn-danger"} %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="requests">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>User Id</th>
+            <th>Creation date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @requests.each do |request| %>
+            <tr>
+              <th scope="row"><%= request.id %></th>
+              <td><%= request.name %></td>
+              <td><%= request.userId %></td>
+              <td><%= request.creationDate %></td>
+              <td>
+                <%= button_to "Accept", { action:"accept", controller:"sessions", _requestId:request.id}, { class:"btn btn-success"} %>
+                <%= button_to "Reject", { action: "reject", controller:"sessions", _requestId:request.id}, { class:"btn btn-danger"} %>
+              </td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="information">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Category Id</th>
+            <th>User Id</th>
+            <th>Creation date</th>
+            <th>Content</th>
+            <th>Public</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @informations.each do |info| %>
+            <tr>
+              <th scope="row"><%= info.id %></th>
+              <td><%= info.categoryId %></td>
+              <td><%= info.userId %></td>
+              <td><%= info.creationDate %></td>
+              <td><%= info.content %></td>
+              <td>
+                <%= if(info.public)
+                      button_to "Make private", { action:"makePrivate", controller:"sessions", _informationId:info.id}, { class:"btn btn-warning"}
+                    else
+                      button_to "Make public", { action:"makePublic", controller:"sessions", _informationId:info.id}, { class:"btn btn-success"}
+                    end %>
+              </td>
+              <td><%= button_to "Delete", { action: "deleteInformation", controller:"sessions", _informationId:info.id}, { class:"btn btn-danger"} %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,53 @@
+.nav-tabs > li > a {
+  color: #ddd;
+  background-color: #555;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+  border: 1px solid #eee;
+}
+
+.nav > li > a:hover, .nav > li > a:focus {
+  background-color: #666;
+}
+
+.navbar-default {
+  background-color: #555;
+  border-color: #666;
+}
+
+.navbar-default .navbar-brand {
+  color: #fff;
+  font-size: 17px;
+}
+
+.navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
+  color: #eee;
+}
+
+.navbar-default .navbar-nav > li > a {
+  color: #fff;
+  font-size: 17px;
+}
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+  color: #eee;
+}
+
+.tab-pane {
+  background-color: #fff;
+  padding: 5px 10px;
+}
+
+.main-content{
+  margin: 0px 10px;
+}
+
+.table {
+  margin-bottom: 2px;
+}
+
+.button_to,
+.button_to div {
+  display: inline;
+}

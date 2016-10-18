@@ -8,11 +8,11 @@
       <%= form_tag(:action => 'login_attempt') do %>
         <%= content_tag :div, class: "profile__fields" do -%>
           <%= content_tag :div, class: "field" do -%>
-            <input type="text" id="_email" class="input" required pattern=.*\S.* />
+            <input type="text" name="_email" class="input" required pattern=.*\S.* />
             <label for="fieldUser" class="label">Username</label>
           <% end %>
           <%= content_tag :div, class: "field" do -%>
-            <input type="password" id="_password" class="input" required pattern=.*\S.* />
+            <input type="password" name="_password" class="input" required pattern=.*\S.* />
             <label for="fieldPassword" class="label">Password</label>
           <% end %>
           <%= button_tag(type: 'submit', class: 'profile__footer') do %>

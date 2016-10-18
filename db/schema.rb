@@ -20,14 +20,6 @@ ActiveRecord::Schema.define(version: 0) do
     t.index ["userId"], name: "userId", using: :btree
   end
 
-  create_table "categories_requests", id: :bigint, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint   "userId",                  null: false
-    t.string   "name",         limit: 20, null: false
-    t.datetime "creationDate",            null: false
-    t.index ["name"], name: "name", unique: true, using: :btree
-    t.index ["userId"], name: "userId", using: :btree
-  end
-
   create_table "informations", id: :bigint, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint   "userId",                                   null: false
     t.bigint   "categoryId",                               null: false
@@ -35,6 +27,14 @@ ActiveRecord::Schema.define(version: 0) do
     t.datetime "creationDate",                             null: false
     t.boolean  "public",                   default: false, null: false
     t.index ["categoryId"], name: "categoryId", using: :btree
+    t.index ["userId"], name: "userId", using: :btree
+  end
+
+  create_table "requests", id: :bigint, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint   "userId",                  null: false
+    t.string   "name",         limit: 20, null: false
+    t.datetime "creationDate",            null: false
+    t.index ["name"], name: "name", unique: true, using: :btree
     t.index ["userId"], name: "userId", using: :btree
   end
 
